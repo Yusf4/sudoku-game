@@ -11,7 +11,7 @@ const Board=({board,onCellChange})=>{
                         value={cell.value}
                         fixed={cell!==null}
                         onChange={(value)=>onCellChange(rowIndex,colIndex,value)}
-               
+                        
                         />
                     ) )}
                 </div>
