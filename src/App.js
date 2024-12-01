@@ -7,7 +7,7 @@ const App=()=>{
   const [game,setGame]=useState(generateSudoku());
   const handleCellChange=(row,col,value)=>{
     const newBoard=game.puzzle.map((r,rowIndex)=>
-    r.map((c,colIndex)=> (rowIndex=== row &&colIndex=== col ?value:c))
+    r.map((c,colIndex)=> (rowIndex=== row && colIndex=== col ? value:c))
     );
     setGame({...game,puzzle:newBoard});
   };

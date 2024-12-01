@@ -5,16 +5,23 @@ const Board=({board,onCellChange})=>{
         <div className="grid grid-cols-9 gap-[1px] bg-gray-400">
             {board.map((row,rowIndex)=>(
                 <div key={rowIndex} className="sudoku-row">
-                    { row.map((cell,colIndex)=>(
+                    { row.map((cell,colIndex)=>{
+                       const value= cell!==null ? cell:null ;
+                       const fixed=cell !==null ;
+                       return (
                         <Cell 
                         key={`${rowIndex}-${colIndex}`}
-                        value={cell.value}
-                        fixed={cell!==null}
-                        onChange={(value)=>onCellChange(rowIndex,colIndex,value)}
+                        value={value}
+                        fixed={fixed}
+                        onChange={(newValue)=>onCellChange(rowIndex,colIndex,newValue)}
                         
                         />
-                    ) )}
-                </div>
+                    );
+})}
+</div>
+                       
+                     
+                
             ))}
         
         </div>
