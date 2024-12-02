@@ -1,19 +1,69 @@
 export const generateSudoku=()=>{
     const puzzle=[
-        [5, 3, null, null, 7, null, null, null, null],
-        [6, null, null, 1, 9, 5, null, null, null],
-        [null, 9, 8, null, null, null, null, 6, null],
-        [8, null, null, null, 6, null, null, null, 3],
-        [4, null, null, 8, null, 3, null, null, 1],
-        [7, null, null, null, 2, null, null, null, 6],
-        [null, 6, null, null, null, null, 2, 8, null],
-        [null, null, null, 4, 1, 9, null, null, 5],
-        [null, null, null, null, 8, null, null, 7, 9],
+        [
+        [5, 3, null],
+         [null, 7, null],
+         [null, null, null]
+         ],
+        [
+            [6, null, null],
+            [ 1, 9, 5],
+            [null, null, null],
+        ],
+        [
+        [null, 9, 8],
+         [null, null, null],
+         [null, 6, null],
+        ],
+        [
+            [8, null, null], 
+            [null, 6, null],
+            [null, null, 3],
+        ],
+        [
+         [4, null, null], 
+         [8, null, 3],
+         [null, null, 1],
+    ],
+        [
+            [7, null, null], 
+            [null, 2, null], 
+            [null, null, 6],
+        ],
+        [
+        [null, 6, null], 
+        [null, null, null],
+        [2, 8, null],
+        ],
+        [
+            [null, null, null],
+            [ 4, 1, 9], 
+        [null, null, 5],
+        ],
+        [
+            [null, null, null],
+             [null, 8, null],
+              [null, 7, 9],
+        ],
     ];
     const solution = JSON.parse(JSON.stringify(puzzle));
     solveSudoku(solution);
     return {puzzle,solution};
 };
+const flattenBoard=(board)=>{
+    const flatBoard=Array.from({length :9},()=>
+    Array(9).fill(null));
+    board.forEach((block,blockIndex)=>{
+        const startRow=Math.floor(blockIndex/3)*3;
+        const startCol=(blockIndex %3)*3;
+        block.forEach((row,rowIndex)=>{
+            row.forEach((value,colIndex)=>{
+                flatBoard[startRow+rowIndex][startCol+colIndex]=value;
+            });
+        });
+    });
+    return flatBoard;
+}
 const isValidMove=(board,row,col,value)=>{
     for(let i=0;i<9;i++){
         if(board[row][i]==value || board[i][col]===value) return false;
