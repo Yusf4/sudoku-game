@@ -2,18 +2,18 @@ import React from "react";
 import Cell from "./cell";
 const Board=({board,onCellChange})=>{
     return (
-        <div className="grid grid-cols-9 gap-[1px] bg-gray-400">
-            {board.map((row,rowIndex)=>(
-                <div key={rowIndex} className="sudoku-row">
-                    { row.map((cell,colIndex)=>{
+        <div className="grid grid-cols-3 gap-[2px] bg-gray-600 p-[10px]">
+            {board.map((block,blockIndex)=>(
+                <div key={blockIndex} className="grid grid-cols-3 gap-[1px] bg-gray-300 p-[5px]">
+                    { block.map((cell,cellIndex)=>{
                        const value= cell!==null ? cell:null ;
                        const fixed=cell !==null ;
                        return (
                         <Cell 
-                        key={`${rowIndex}-${colIndex}`}
+                        key={`${blockIndex}-${cellIndex}`}
                         value={value}
                         fixed={fixed}
-                        onChange={(newValue)=>onCellChange(rowIndex,colIndex,newValue)}
+                        onChange={(newValue)=>onCellChange(blockIndex,cellIndex,newValue)}
                         
                         />
                     );
