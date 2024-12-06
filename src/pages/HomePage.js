@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { generateSudoku } from '../utils/sudoku';
 import Board from '../components/board';
 const HomePage=()=>{
+  const MAX_MISTAKES=3;
   const[mistakes,setMistakes]=useState(0);
   const [game,setGame]=useState(generateSudoku());
   const handleCellChange=(row,col,value)=>{
@@ -10,8 +11,15 @@ const HomePage=()=>{
     r.map((c,colIndex)=> (rowIndex=== row && colIndex=== col ? value:c))
     );
     if(value!==game.solution[row][col]){
-      setMistakes((prevMistakes)=>prevMistakes+1);
-    }
+      setMistakes((prevMistakes)=>{
+    const updatedMistakes=prevMistakes+1;
+   if(updatedMistakes >= MAX_MISTAKES){
+    alert("You lost! restarting the game.");
+    resetGame();
+   }
+   return updatedMistakes;
+     });
+  }
     setGame({...game,puzzle:newBoard});
   };
   const resetGame=()=>{
