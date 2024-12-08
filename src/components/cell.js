@@ -11,12 +11,13 @@ const Cell=({value,fixed,onChange,isWrong})=>{
         <input
         type="text"
         maxLength="1"
-        className={`w-10 h-10 text-center text-lg border ${
-          fixed ?   "bg-gray-200 cursor-not-allowed"
-          : isWrong
-          ? "text-red-500 border-red-500"
-          : "bg-white"
-        }`}
+        className={`w-10 h-10 text-center font-bold border ${
+            fixed
+              ? "bg-gray-200 cursor-not-allowed"
+              : isWrong
+              ? "text-red-500 border-red-500"
+              : "bg-white"
+          }`}
         value={displayValue|| ''}
         disabled={fixed}
         onChange={(e)=>{
