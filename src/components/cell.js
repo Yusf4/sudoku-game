@@ -16,7 +16,7 @@ const Cell=({value,fixed,onChange,isWrong})=>{
               ? "bg-gray-200 cursor-not-allowed"
               : isWrong
               ? "text-red-500 border-red-500"
-              : "bg-white"
+              : "bg-white text-black"
           }`}
         value={displayValue|| ''}
         disabled={fixed}
