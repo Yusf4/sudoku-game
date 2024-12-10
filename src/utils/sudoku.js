@@ -1,5 +1,5 @@
 export const generateSudoku=()=>{
-    const puzzle=[
+  /*  const puzzle=[
         [5, 3, null, null, 7, null, null, null, null],
         [6, null, null, 1, 9, 5, null, null, null],
         [null, 9, 8, null, null, null, null, 6, null],
@@ -9,10 +9,38 @@ export const generateSudoku=()=>{
         [null, 6, null, null, null, null, 2, 8, null],
         [null, null, null, 4, 1, 9, null, null, 5],
         [null, null, null, null, 8, null, null, 7, 9],
-    ];
-    const solution = JSON.parse(JSON.stringify(puzzle));
+    ];*/
+    const shuffleArray=(array)=>{
+        for(let i=array.length-1;i>0;i--){
+            const j=Math.floor(Math.random()*(i+1));
+            [array[i],array[j]]=[array[j],array[i]];
+        }
+        return array;
+    }
+    const generateSolvedBoard=()=>{
+        const board=Array.from({length:9},()=>Array(9).fill(null));
+        solveSudoku(board);
+        return board;
+    }
+    const removeCells=(board,numberToRemove)=>{
+        const puzzle=JSON.parse(JSON.stringify(board));
+        let cellsRemoved=0;
+        while(cellsRemoved<numberToRemove){
+            const row=Math.floor(Math.random() *9);
+            const col=Math.floor(Math.random()*9);
+            if(puzzle[row][col]!==null){
+                puzzle[row][col]=null;
+                cellsRemoved++;
+            }
+        }
+        return puzzle;
+    };
+    const baseBoard=generateSolvedBoard();
+    const puzzle=removeCells(baseBoard,50);
+    return {puzzle,solution:baseBoard};
+   /* const solution = JSON.parse(JSON.stringify(puzzle));
     solveSudoku(solution);
-    return {puzzle,solution};
+    return {puzzle,solution};*/
 };
 /*const flattenBoard=(board)=>{
     const flatBoard=Array.from({length :9},()=>
