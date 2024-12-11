@@ -10,6 +10,9 @@ const HomePage=()=>{
     const newBoard=game.puzzle.map((r,rowIndex)=>
     r.map((c,colIndex)=>{
 if(rowIndex=== row && colIndex===col){
+  if(value===null || value===""){
+    return {value:null,isWrong:false};
+  }
 return {value,isWrong:value!==game.solution[row][col]};
 }
 return c;

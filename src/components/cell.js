@@ -19,7 +19,7 @@ const Cell=({value,fixed,onChange,isWrong})=>{
               : "bg-white text-black"
           }`}
         value={displayValue|| ''}
-        disabled={fixed}
+        disabled={fixed && value!==null}
         onChange={(e)=>{
             const val= parseInt(e.target.value,10);
             if(val>=1 && val<=9){
