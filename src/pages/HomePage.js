@@ -19,7 +19,7 @@ return c;
     } )
    
   );
-    if(value!==game.solution[row][col]){
+    if(value!==null && value!=="" && value!==game.solution[row][col]){
       setMistakes((prevMistakes)=>{
     const updatedMistakes=prevMistakes+1;
    if(updatedMistakes >= MAX_MISTAKES){
