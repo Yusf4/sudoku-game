@@ -7,7 +7,7 @@ const Board=({board,onCellChange})=>{
                 <div key={blockIndex} className="grid grid-cols-3 gap-[1px] bg-gray-300 p-[5px]">
                     { block.map((cell,cellIndex)=>{
                    const  value = cell && typeof cell === "object" ? cell.value : cell;
-                   const isCorrect=cell && typeof cell==="object" &&  !cell.isWrong;
+                  // const isCorrect=cell && typeof cell==="object" &&  !cell.isWrong;
                    const isWrong = cell && typeof cell === "object" ? cell.isWrong : false;
                        const fixed = cell !== null && typeof cell !== "object"; // Fixed cells are non-object values
                        return (
@@ -15,7 +15,7 @@ const Board=({board,onCellChange})=>{
                         key={`${blockIndex}-${cellIndex}`}
                         value={value}
                         isWrong={isWrong}
-                        fixed={fixed ||isCorrect}
+                        fixed={fixed }
                         onChange={(newValue)=>onCellChange(blockIndex,cellIndex,newValue)}
                         
                         />
