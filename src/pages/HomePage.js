@@ -41,26 +41,40 @@ return c;
   alert(isSolved ? 'Congratulations ! you solved it!' :'Incorrect solution');
   };
   return (
-    <div className="flex flex-col items-center p-4">
-      <h1 className="text-2xl font-bold mb-4">Sudoku Game</h1>
-      <Board board={game.puzzle} onCellChange={handleCellChange}/>
-      <div className="mt-4 text-red-500">Mistakes: {mistakes}/{MAX_MISTAKES}</div>
-      <div className="mt-4">
+    <div className="flex flex-col items-center p-6 min-h-screen bg-gradient-to-b from-blue-100 to-blue-300">
+      {/* Title with Animation */}
+      <h1 className="text-4xl font-extrabold mb-6 text-blue-700 animate-bounce">
+        Sudoku Game
+      </h1>
+  
+      {/* Board */}
+      <div className="shadow-lg rounded-lg p-5 bg-white transform hover:scale-105 transition duration-300">
+        <Board board={game.puzzle} onCellChange={handleCellChange} />
+      </div>
+  
+      {/* Mistakes Counter */}
+      <div className="mt-6 text-xl font-semibold text-red-600">
+        Mistakes: <span className="animate-pulse">{mistakes}</span> / {MAX_MISTAKES}
+      </div>
+  
+      {/* Buttons with Hover and Animation */}
+      <div className="mt-8 space-x-4">
         <button
-       className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-       onClick={resetGame}
-     >
-      New game
-      </button>
-      <button 
-       className="bg-green-500 text-white px-4 py-2 rounded"
-       onClick={checkSolution}
-       >
-      Check Solution
-       </button>
-       </div>
-       </div>
-  )
+          className="bg-blue-500 text-white px-6 py-3 rounded shadow-lg hover:bg-blue-600 transform hover:scale-110 transition duration-300"
+          onClick={resetGame}
+        >
+          New Game
+        </button>
+        <button
+          className="bg-green-500 text-white px-6 py-3 rounded shadow-lg hover:bg-green-600 transform hover:scale-110 transition duration-300"
+          onClick={checkSolution}
+        >
+          Check Solution
+        </button>
+      </div>
+    </div>
+  );
+  
 
 }
 export default HomePage;
