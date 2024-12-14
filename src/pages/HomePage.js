@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import { generateSudoku } from '../utils/sudoku';
 import Board from '../components/board';
+import { useResolvedPath } from 'react-router-dom';
 const HomePage=()=>{
   const MAX_MISTAKES=3;
   const[mistakes,setMistakes]=useState(0);
+  const [level,setLevel]=useState('Easy');
   const [game,setGame]=useState(generateSudoku());
   const handleCellChange=(row,col,value)=>{
     const newBoard=game.puzzle.map((r,rowIndex)=>
@@ -24,16 +26,20 @@ return c;
     const updatedMistakes=prevMistakes+1;
    if(updatedMistakes >= MAX_MISTAKES){
     alert("You lost! restarting the game.");
-    resetGame();
+    resetGame(level);
    }
    return updatedMistakes;
      });
   }
     setGame({...game,puzzle:newBoard});
   };
-  const resetGame=()=>{
-    setGame(generateSudoku());
+  const resetGame=(selectedLevel=level)=>{
+    setGame(generateSudoku(selectedLevel));
     setMistakes(0);
+  }
+  const handleLevelChange=(newLevel)=>{
+    setLevel(newLevel);
+    resetGame(newLevel);
   }
   const checkSolution=()=>{
     const isSolved= 
@@ -46,7 +52,21 @@ return c;
       <h1 className="text-4xl font-extrabold mb-6 text-blue-700 animate-bounce">
         Sudoku Game
       </h1>
-  
+      <div className="flex space-x-4 mb-4">
+        {['Easy', 'Medium', 'Hard', 'Expert'].map((lvl) => (
+          <button
+            key={lvl}
+            className={`px-4 py-2 rounded ${
+              level === lvl
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-black hover:bg-gray-300'
+            }`}
+            onClick={() => handleLevelChange(lvl)}
+          >
+            {lvl}
+          </button>
+        ))}
+      </div>
       {/* Board */}
       <div className="shadow-lg rounded-lg p-5 bg-white transform hover:scale-105 transition duration-300">
         <Board board={game.puzzle} onCellChange={handleCellChange} />
