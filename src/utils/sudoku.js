@@ -1,9 +1,9 @@
 export const generateSudoku=(level)=>{
   const levels={
-    Easy:20,
-    Medium:40,
-    Hard:55,
-    Expert:64,
+    Easy:30,
+    Medium:45,
+    Hard:60,
+    Expert:65,
   };
   const blanks=levels[level]||20;
   

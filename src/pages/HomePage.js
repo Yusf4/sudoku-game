@@ -34,7 +34,8 @@ return c;
     setGame({...game,puzzle:newBoard});
   };
   const resetGame=(selectedLevel=level)=>{
-    setGame(generateSudoku(selectedLevel));
+   const newGame=generateSudoku(selectedLevel);
+    setGame(newGame);
     setMistakes(0);
   }
   const handleLevelChange=(newLevel)=>{
