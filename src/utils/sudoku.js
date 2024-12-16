@@ -5,8 +5,10 @@ export const generateSudoku=(level)=>{
     Hard:60,
     Expert:65,
   };
-  const blanks=levels[level]||20;
-  
+  console.log("level:"+level);
+  const blanks=levels[level];
+
+  console.log("blanks:"+blanks);
     const generateSolvedBoard=()=>{
         const board=Array.from({length:9},()=>Array(9).fill(null));
         solveSudoku(board);
@@ -27,7 +29,7 @@ export const generateSudoku=(level)=>{
         return puzzle;
     };
     const baseBoard=generateSolvedBoard();
-    const puzzle=removeCells(baseBoard,50);
+    const puzzle=removeCells(baseBoard,blanks);
     return {puzzle,solution:baseBoard};
    /* const solution = JSON.parse(JSON.stringify(puzzle));
     solveSudoku(solution);

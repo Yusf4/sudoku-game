@@ -7,7 +7,7 @@ const HomePage=()=>{
   const MAX_MISTAKES=3;
   const[mistakes,setMistakes]=useState(0);
   const [level,setLevel]=useState('Easy');
-  const [game,setGame]=useState(generateSudoku());
+  const [game,setGame]=useState(generateSudoku(level));
   const handleCellChange=(row,col,value)=>{
     const newBoard=game.puzzle.map((r,rowIndex)=>
     r.map((c,colIndex)=>{
