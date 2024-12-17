@@ -5,10 +5,10 @@ export const generateSudoku=(level)=>{
     Hard:60,
     Expert:65,
   };
-  console.log("level:"+level);
+
   const blanks=levels[level];
 
-  console.log("blanks:"+blanks);
+  //console.log("blanks:"+blanks);
     const generateSolvedBoard=()=>{
         const board=Array.from({length:9},()=>Array(9).fill(null));
         solveSudoku(board);
@@ -18,7 +18,7 @@ export const generateSudoku=(level)=>{
     const removeCells=(board,numberToRemove)=>{
         const puzzle=JSON.parse(JSON.stringify(board));
         let cellsRemoved=0;
-        while(cellsRemoved<blanks){
+        while(cellsRemoved<numberToRemove){
             const row=Math.floor(Math.random() *9);
             const col=Math.floor(Math.random()*9);
             if(puzzle[row][col]!==null){
@@ -29,8 +29,9 @@ export const generateSudoku=(level)=>{
         return puzzle;
     };
     const baseBoard=generateSolvedBoard();
+   const solution= JSON.parse(JSON.stringify(baseBoard));
     const puzzle=removeCells(baseBoard,blanks);
-    return {puzzle,solution:baseBoard};
+    return {puzzle,solution};
    /* const solution = JSON.parse(JSON.stringify(puzzle));
     solveSudoku(solution);
     return {puzzle,solution};*/
