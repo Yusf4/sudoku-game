@@ -10,20 +10,24 @@ export const generateSudoku=(level)=>{
 
   //console.log("blanks:"+blanks);
     const generateSolvedBoard=()=>{
-        const board=Array.from({length:9},()=>Array(9).fill(null));
+        const board=Array.from({length:9},()=>Math.floor(Math.random() * 9) + 1);
+    
+  
+            //()=>Array(9).fill(null));
         solveSudoku(board);
         return board;
     }
     
     const removeCells=(board,numberToRemove)=>{
         const puzzle=JSON.parse(JSON.stringify(board));
-        let cellsRemoved=0;
-        while(cellsRemoved<numberToRemove){
+        let cellsRemoved=new Set();
+        while(cellsRemoved.size<numberToRemove){
             const row=Math.floor(Math.random() *9);
             const col=Math.floor(Math.random()*9);
-            if(puzzle[row][col]!==null){
+          const key=`${row},${col}`;
+            if(!cellsRemoved.has(key) && puzzle[row][col]!==null){
                 puzzle[row][col]=null;
-                cellsRemoved++;
+                cellsRemoved.add(key);
             }
         }
         return puzzle;
