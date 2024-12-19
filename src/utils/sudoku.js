@@ -9,14 +9,25 @@ export const generateSudoku=(level)=>{
   const blanks=levels[level];
 
   //console.log("blanks:"+blanks);
-    const generateSolvedBoard=()=>{
-        const board=Array.from({length:9},()=>Math.floor(Math.random() * 9) + 1);
+  const generateSolvedBoard = () => {
+    const board = Array.from({ length: 9 }, () => Array(9).fill(null));
     
-  
-            //()=>Array(9).fill(null));
-        solveSudoku(board);
-        return board;
+    // Shuffle numbers before solving
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
     }
+
+    // Fill the board with shuffled numbers and solve
+    for (let i = 0; i < 9; i++) {
+        board[0][i] = numbers[i];
+    }
+
+    solveSudoku(board);
+    return board;
+};
+
     
     const removeCells=(board,numberToRemove)=>{
         const puzzle=JSON.parse(JSON.stringify(board));
