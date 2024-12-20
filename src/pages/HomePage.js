@@ -43,9 +43,13 @@ return c;
     resetGame(newLevel);
   }
   const checkSolution=()=>{
-    const isSolved= 
-    JSON.stringify(game.puzzle)=== JSON.stringify(game.solution);
-  alert(isSolved ? 'Congratulations ! you solved it!' :'Incorrect solution');
+    const isSolved = game.puzzle.every((row, i) =>
+      row.every((cell, j) => {
+        const cellValue = cell && typeof cell === "object" ? cell.value : cell;
+        return cellValue === game.solution[i][j];
+      })
+    );
+    
   };
   return (
     <div className="flex flex-col items-center p-6 min-h-screen bg-gradient-to-b from-blue-100 to-blue-300">
